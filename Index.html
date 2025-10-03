@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Certificate Verification</title>
+
+<!-- Use Inter / fallback -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --accent:#f2851a;
+    --blue:#0b6efd;
+    --muted:#6b7a90;
+    --card-bg: #fff;
+    --page-bg:#fafafa;
+    --max:1180px;
+  }
+
+  html,body{height:100%;margin:0;background:linear-gradient(#fff,#fbfcff 60%);font-family:Inter,Arial,Helvetica,sans-serif;color:#142433}
+  .container{max-width:var(--max);margin:0 auto;padding:10px 18px}
+
+  /* Top header like screenshot */
+  .top{
+    display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:4px solid #e6f0ff;background:linear-gradient(90deg,#fff,#fff);
+  }
+  .brand-left, .brand-center, .brand-right{flex:1;display:flex;align-items:center;justify-content:center}
+  .brand-left img, .brand-center img, .brand-right img{height:54px;object-fit:contain}
+  .navbar{background:var(--accent);padding:12px;border-radius:2px;margin-top:8px;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+  .nav-row{display:flex;align-items:center;padding:0 12px;color:#fff;font-weight:700}
+  .nav-row .left{flex:1} .nav-row .right{display:flex;gap:8px;align-items:center}
+  .pill{background:rgba(255,255,255,0.12);padding:6px 12px;border-radius:6px;font-weight:700}
+
+  /* Card */
+  .card{background:var(--card-bg);border-radius:8px;padding:36px;margin-top:22px;box-shadow:0 10px 30px rgba(20,36,51,0.06)}
+  .center-col{display:flex;flex-direction:column;align-items:center;gap:6px}
+
+  .badge{
+    width:96px;height:96px;border-radius:18px;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 30% 30%, #eaf5ff, #dff2ff);
+    color:var(--blue);font-weight:800;font-size:48px;box-shadow:0 6px 18px rgba(11,110,237,0.08)
+  }
+  .verified{color:#1a7f2a;font-weight:700;margin-top:6px}
+
+  /* Details layout */
+  .details{margin-top:18px;max-width:640px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .item{flex:1 1 300px;background:#fbfdff;border:1px solid #eef6ff;padding:12px;border-radius:8px;margin:6px 0}
+  .key{font-size:13px;color:var(--muted)}
+  .val{font-size:15px;font-weight:700;color:#0f2130;margin-top:6px}
+
+  .meta{margin-top:12px;color:#657085;font-size:13px}
+
+  /* Dummy LOGIN / REGISTER look */
+  .top-right{display:flex;gap:10px;align-items:center}
+  .link-btn{background:#fff;padding:6px 10px;border-radius:4px;border:1px solid rgba(0,0,0,0.06);font-weight:700;color:#333}
+
+  /* WhatsApp-like floating box (just for realistic look) */
+  .whats{
+    position:fixed;right:16px;bottom:18px;width:260px;border-radius:10px;background:#fff;border:1px solid #e8f7ea;box-shadow:0 12px 30px rgba(10,30,10,0.08);overflow:hidden;font-size:13px
+  }
+  .whats .hdr{background:#25d366;color:#fff;padding:10px 12px;font-weight:700;display:flex;gap:8px;align-items:center}
+  .whats .body{padding:12px}
+  .whats .name{font-weight:700}
+  .whats .msg{color:#666;margin-top:6px}
+  .whats .reply{display:flex;gap:8px;padding:10px;border-top:1px solid #f1f1f1}
+  .whats input{flex:1;padding:8px;border-radius:6px;border:1px solid #e6e6e6}
+
+  /* small screens */
+  @media(max-width:720px){
+    .brand-left, .brand-center, .brand-right{justify-content:center}
+    .row{flex-direction:column}
+    .whats{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header like screenshot -->
+    <div class="top">
+      <div class="brand-left"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='60'><rect width='100%' height='100%' fill='%23ffffff'/><text x='10' y='40' font-size='28' fill='%23007acc' font-family='Arial'>कौशल भारत</text></svg>" alt="left-logo"></div>
+
+      <div class="brand-center"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='60'><rect width='100%' height='100%' fill='%23ffffff'/><text x='8' y='38' font-size='20' fill='%23007acc' font-family='Arial'>Skill India</text></svg>" alt="center-logo"></div>
+
+      <div class="brand-right"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='60'><rect width='100%' height='100%' fill='%23ffffff'/><text x='6' y='40' font-size='28' fill='%23007acc' font-family='Arial'>कुशल भारत</text></svg>" alt="right-logo"></div>
+    </div>
+
+    <div class="navbar">
+      <div class="nav-row">
+        <div class="left">HOME</div>
+        <div class="right">
+          <div class="pill">Technical Support</div>
+          <div class="link-btn">LOGIN</div>
+          <div class="link-btn">Register</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+      <div class="center-col">
+        <div class="badge" aria-hidden>✓</div>
+        <div class="verified" id="statusText">Certificate Verified</div>
+      </div>
+
+      <div class="details" id="details">
+        <!-- dynamic rows -->
+      </div>
+
+      <div class="meta" id="meta">Scanned on: --</div>
+    </div>
+
+  </div>
+
+  <!-- Floating WhatsApp-like chat (dummy) -->
+ 
+<script>
+  // Decode function for + and %20
+  function decodePlus(s){ try { return decodeURIComponent((s||'').replace(/\+/g,' ')); } catch(e){ return s; } }
+  const params = new URLSearchParams(window.location.search);
+
+  const detailsEl = document.getElementById('details');
+  const metaEl = document.getElementById('meta');
+  const statusText = document.getElementById('statusText');
+
+  if(!params.toString()){
+    statusText.textContent = 'No data supplied in URL';
+    statusText.style.color = '#b03';
+    detailsEl.innerHTML = '<div style="color:#777;padding:14px;background:#fff;border-radius:6px">Open this page with query parameters in the URL. Example: <br><code>?Candidate%20Name=Rahul+Kumar&Candidate%20ID=TR123</code></div>';
+    metaEl.textContent = 'Open link with query parameters.';
+  } else {
+    // Nice order
+    const order = [
+      ['Candidate Name', ['Candidate Name','Candidate%20Name','CandidateName']],
+      ['Candidate ID', ['Candidate ID','CandidateID','Candidate%2FID']],
+      ['Sector Name', ['Sector Name','SectorName','Sector%20Name']],
+      ['QP Code', ['QP Code','QPCode','QP%20Code']],
+      ['QP Name', ['QP Name','QPName','QP%20Name']],
+      ['JobRole Name', ['JobRole Name','JobRoleName']],
+      ['QP Version', ['QPVersion','QP%20Version','QP%20Version']],
+      ['Grade', ['Grade']],
+      ['Document ID', ['Document ID','DocumentID']],
+      ['Issuance Date', ['IssuanceDate','Issuance Date']],
+      ['Valid Upto', ['ValidUpto','Valid Upto','Valid%20Till%20Date','Valid%20Upto']],
+      ['Type', ['Type','Document']],
+      ['Note', ['Note','Extra']]
+    ];
+
+    const shown = new Set();
+
+    function addBlock(k,v){
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML = `<div class="key">${k}</div><div class="val">${v}</div>`;
+      detailsEl.appendChild(div);
+    }
+
+    // add known keys
+    order.forEach(([label, keys])=>{
+      for(const k of keys){
+        if(params.has(k)){
+          addBlock(label, decodePlus(params.get(k)));
+          shown.add(k);
+          break;
+        }
+      }
+    });
+
+    // add remaining
+    params.forEach((v,k)=>{
+      if(!shown.has(k)){
+        // make label user friendly
+        const lbl = k.replace(/%20/g,' ').replace(/%2F/g,'/').replace(/\+/g,' ');
+        addBlock(lbl, decodePlus(v));
+      }
+    });
+
+    statusText.textContent = '✅ Certificate Verified';
+    statusText.style.color = '#1a7f2a';
+    metaEl.textContent = 'Scanned on: ' + new Date().toLocaleString();
+  }
+</script>
+</body>
+</html>
